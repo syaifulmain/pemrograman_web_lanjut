@@ -28,3 +28,17 @@ Route::get('/world', function () {
 Route::get('/about', function () {
     return "NIM : 2341720013 <br> Nama : Muhamad Syaifullah";
 });
+
+// Route Parameters
+
+Route::get('/user/{name}', function ($name) {
+    return "Nama saya " . $name;
+});
+
+Route::get('/posts/{post}/comments/{commnet}', function ($postId, $commentId) {
+    return "Pos ke-" . $postId . " Komentar ke-: " . $commentId;
+});
+
+Route::get('/articles/{id}', function ($id) {
+    return "Halaman artikel dengan ID " . $id;
+});
