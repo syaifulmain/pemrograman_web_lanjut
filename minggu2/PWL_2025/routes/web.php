@@ -87,3 +87,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/post', [PostController::class, 'index']);
     Route::get('/event', [EventController::class, 'index']);
 });
+
+// Route Prefixes
+
+Route::prefix('admin')->group(function () {
+    Route::get('/user', [UserController::class, 'index']);
+    Route::get('/post', [PostController::class, 'index']);
+    Route::get('/event', [EventController::class, 'index']);
+});
+
+// Redirect Route
+
+Route::redirect('/here', '/there');
+
+// View Route
+
+Route::view('/welcome', 'welcome');
+Route::view('/welcome', 'welcome', ['name' => 'Taylor']);
