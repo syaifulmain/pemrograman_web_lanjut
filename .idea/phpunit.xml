@@ -3,12 +3,16 @@
   <component name="PHPUnit">
     <option name="directories">
       <list>
-        <option value="$PROJECT_DIR$/minggu1/tests/Unit" />
-        <option value="$PROJECT_DIR$/minggu1/tests/Feature" />
         <option value="$PROJECT_DIR$/minggu2/tests/Unit" />
         <option value="$PROJECT_DIR$/minggu2/tests/Feature" />
+        <option value="$PROJECT_DIR$/minggu2/PWL_2025/tests/Unit" />
+        <option value="$PROJECT_DIR$/minggu2/PWL_2025/tests/Feature" />
         <option value="$PROJECT_DIR$/minggu2/MemberiKomentar/tests/Unit" />
         <option value="$PROJECT_DIR$/minggu2/MemberiKomentar/tests/Feature" />
+        <option value="$PROJECT_DIR$/minggu2/POS/tests/Unit" />
+        <option value="$PROJECT_DIR$/minggu2/POS/tests/Feature" />
+        <option value="$PROJECT_DIR$/minggu1/tests/Unit" />
+        <option value="$PROJECT_DIR$/minggu1/tests/Feature" />
       </list>
     </option>
   </component>
