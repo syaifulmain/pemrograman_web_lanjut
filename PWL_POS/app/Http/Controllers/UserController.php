@@ -47,7 +47,11 @@ class UserController extends Controller
 
 //        JS: Praktikum 2.2
 //        $user = UserModel::findOrFail(1);
-        $user = UserModel::where('username', 'manager9')->firstOrFail();
+//        $user = UserModel::where('username', 'manager9')->firstOrFail();
+
+//        JS: Praktikum 2.3
+        $user = UserModel::where('level_id', 2)->count();
+//        dd($user);
         return view('user', ['data' => $user]);
     }
 }
