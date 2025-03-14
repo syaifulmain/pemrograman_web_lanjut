@@ -24,6 +24,10 @@ Route::get('/', function () {
 Route::get('/kategori/create', [KategoriController::class, 'create']);
 Route::post('/kategori', [KategoriController::class, 'store']);
 Route::get('/kategori', [KategoriController::class, 'index']);
+
+Route::get('kategori/edit/{id}', [KategoriController::class, 'edit']);
+Route::put('kategori/edit', [KategoriController::class, 'update']);
+Route::get('kategori/hapus/{id}', [KategoriController::class, 'delete']);
 //Route::get('/user', [UserController::class, 'index']);
 //
 //JS4
