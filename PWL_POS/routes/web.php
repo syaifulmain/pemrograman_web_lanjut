@@ -29,4 +29,11 @@ Route::prefix('kategori')->group(function () {
     Route::get('/hapus/{id}', [KategoriController::class, 'delete']);
 });
 
-
+Route::prefix('level')->group(function () {
+    Route::get('/', [LevelController::class, 'index']);
+    Route::post('/', [LevelController::class, 'store']);
+    Route::get('/create', [LevelController::class, 'create']);
+    Route::get('/edit/{id}', [LevelController::class, 'edit']);
+    Route::put('/edit', [LevelController::class, 'update']);
+    Route::get('/hapus/{id}', [LevelController::class, 'delete']);
+});
