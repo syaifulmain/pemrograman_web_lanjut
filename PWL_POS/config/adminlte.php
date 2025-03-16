@@ -350,11 +350,6 @@ return [
             'url' => 'stok',
             'icon' => 'fas fa-fw fa-warehouse',
         ],
-        [
-            'text' => 'Penjualan Detail',
-            'url' => 'penjualan_detail',
-            'icon' => 'fas fa-fw fa-file-invoice',
-        ],
     ],
 
     /*
