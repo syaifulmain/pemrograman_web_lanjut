@@ -37,3 +37,12 @@ Route::prefix('level')->group(function () {
     Route::put('/edit', [LevelController::class, 'update']);
     Route::get('/hapus/{id}', [LevelController::class, 'delete']);
 });
+
+Route::prefix('user')->group(function () {
+    Route::get('/', [UserController::class, 'index']);
+    Route::post('/', [UserController::class, 'store']);
+    Route::get('/create', [UserController::class, 'create']);
+    Route::get('/edit/{id}', [UserController::class, 'edit']);
+    Route::put('/edit', [UserController::class, 'update']);
+    Route::get('/hapus/{id}', [UserController::class, 'delete']);
+});
