@@ -16,5 +16,6 @@ class VerifyCsrfToken extends Middleware
         '/user',
         '/kategori',
         '/barang',
+        '/penjualan',
     ];
 }

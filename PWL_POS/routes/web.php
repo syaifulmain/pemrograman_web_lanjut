@@ -3,6 +3,7 @@
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -55,4 +56,13 @@ Route::prefix('barang')->group(function () {
     Route::get('/edit/{id}', [BarangController::class, 'edit']);
     Route::put('/edit', [BarangController::class, 'update']);
     Route::get('/hapus/{id}', [BarangController::class, 'delete']);
+});
+
+Route::prefix('penjualan')->group(function () {
+    Route::get('/', [PenjualanController::class, 'index']);
+    Route::post('/', [PenjualanController::class, 'store']);
+    Route::get('/create', [PenjualanController::class, 'create']);
+    Route::get('/edit/{id}', [PenjualanController::class, 'edit']);
+    Route::put('/edit', [PenjualanController::class, 'update']);
+    Route::get('/hapus/{id}', [PenjualanController::class, 'delete']);
 });
