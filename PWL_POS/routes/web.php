@@ -52,7 +52,7 @@ Route::prefix('user')->group(function () {
 Route::prefix('barang')->group(function () {
     Route::get('/', [BarangController::class, 'index']);
     Route::post('/', [BarangController::class, 'store']);
-    Route::get('/create', [BarangController::class, 'create']);
+    Route::get('/create', [BarangController::class, 'create/']);
     Route::get('/edit/{id}', [BarangController::class, 'edit']);
     Route::put('/edit', [BarangController::class, 'update']);
     Route::get('/hapus/{id}', [BarangController::class, 'delete']);
@@ -62,7 +62,6 @@ Route::prefix('penjualan')->group(function () {
     Route::get('/', [PenjualanController::class, 'index']);
     Route::post('/', [PenjualanController::class, 'store']);
     Route::get('/create', [PenjualanController::class, 'create']);
-    Route::get('/edit/{id}', [PenjualanController::class, 'edit']);
-    Route::put('/edit', [PenjualanController::class, 'update']);
+    Route::get('/detail/{id}', [PenjualanController::class, 'detail']);
     Route::get('/hapus/{id}', [PenjualanController::class, 'delete']);
 });

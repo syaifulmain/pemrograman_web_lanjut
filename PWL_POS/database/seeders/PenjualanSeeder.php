@@ -74,66 +74,6 @@ class PenjualanSeeder extends Seeder
                 'penjualan_kode' => '20250110',
                 'penjualan_tanggal' => '2025-01-10',
             ],
-            [
-                'user_id' => 3,
-                'pembeli' => 'Kiki',
-                'penjualan_kode' => '20250111',
-                'penjualan_tanggal' => '2025-01-11',
-            ],
-            [
-                'user_id' => 3,
-                'pembeli' => 'Lia',
-                'penjualan_kode' => '20250112',
-                'penjualan_tanggal' => '2025-01-12',
-            ],
-            [
-                'user_id' => 3,
-                'pembeli' => 'Mira',
-                'penjualan_kode' => '20250113',
-                'penjualan_tanggal' => '2025-01-13',
-            ],
-            [
-                'user_id' => 3,
-                'pembeli' => 'Nina',
-                'penjualan_kode' => '20250114',
-                'penjualan_tanggal' => '2025-01-14',
-            ],
-            [
-                'user_id' => 3,
-                'pembeli' => 'Oki',
-                'penjualan_kode' => '20250115',
-                'penjualan_tanggal' => '2025-01-15',
-            ],
-            [
-                'user_id' => 3,
-                'pembeli' => 'Puput',
-                'penjualan_kode' => '20250116',
-                'penjualan_tanggal' => '2025-01-16',
-            ],
-            [
-                'user_id' => 3,
-                'pembeli' => 'Qori',
-                'penjualan_kode' => '20250117',
-                'penjualan_tanggal' => '2025-01-17',
-            ],
-            [
-                'user_id' => 3,
-                'pembeli' => 'Rina',
-                'penjualan_kode' => '20250118',
-                'penjualan_tanggal' => '2025-01-18',
-            ],
-            [
-                'user_id' => 3,
-                'pembeli' => 'Sari',
-                'penjualan_kode' => '20250119',
-                'penjualan_tanggal' => '2025-01-19',
-            ],
-            [
-                'user_id' => 3,
-                'pembeli' => 'Tono',
-                'penjualan_kode' => '20250120',
-                'penjualan_tanggal' => '2025-01-20',
-            ]
         ]);
     }
 }

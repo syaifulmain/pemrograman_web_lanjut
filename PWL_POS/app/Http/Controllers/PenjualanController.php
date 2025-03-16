@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\PenjualanDataTable;
+use App\Models\BarangModel;
+use App\Models\PenjualanDetailModel;
 use App\Models\PenjualanModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
@@ -17,37 +19,37 @@ class PenjualanController extends Controller
     public function create()
     {
         $users = UserModel::all();
-        return view('penjualan.create', compact('users'));
+        $barangs = BarangModel::all();
+        return view('penjualan.create', compact('users', 'barangs'));
     }
 
     public function store(Request $request)
     {
-        PenjualanModel::create([
+        $penjualan = PenjualanModel::create([
             'penjualan_kode' => $request->penjualan_kode,
             'pembeli' => $request->pembeli,
             'penjualan_tanggal' => $request->penjualan_tanggal,
             'user_id' => $request->user_id,
         ]);
+
+        $penjualan_id = $penjualan->penjualan_id;
+
+        for ($i = 0; $i < count($request->jumlah); $i++) {
+            PenjualanDetailModel::create([
+                'penjualan_id' => $penjualan_id,
+                'barang_id' => $request->barang_id[$i],
+                'jumlah' => $request->jumlah[$i],
+                'harga' => $request->harga[$i],
+            ]);
+        }
+
         return redirect('/penjualan');
     }
 
-    public function edit($id)
+    public function detail($id)
     {
-        $penjualan = PenjualanModel::findOrFail($id);
-        $users = UserModel::all();
-        return view('penjualan.edit', compact('penjualan', 'users'));
-    }
-
-    public function update(Request $request)
-    {
-        $penjualan = PenjualanModel::findOrFail($request->penjualan_id);
-        $penjualan->penjualan_kode = $request->penjualan_kode;
-        $penjualan->pembeli = $request->pembeli;
-        $penjualan->penjualan_tanggal = $request->penjualan_tanggal;
-        $penjualan->user_id = $request->user_id;
-        $penjualan->save();
-
-        return redirect('/penjualan');
+        $penjualan = PenjualanModel::where('penjualan_id', $id)->with('penjualanDetail')->with('penjualanDetail.barang')->with('user')->first();
+        return view('penjualan.detail.index', compact('penjualan'));
     }
 
     public function delete($id)
