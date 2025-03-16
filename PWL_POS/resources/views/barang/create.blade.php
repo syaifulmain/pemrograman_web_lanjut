@@ -34,9 +34,15 @@
                                    placeholder="Masukan Harga Jual" required>
                         </div>
                         <div class="form-group">
-                            <label for="kategori_id">Kategori ID</label>
-                            <input type="text" class="form-control" id="kategori_id" name="kategori_id"
-                                   placeholder="Masukan Kategori ID" required>
+                            <label for="kategori_id">Kategori</label>
+                            <select class="form-control" id="kategori_id" name="kategori_id" required>
+                                <option value="" disabled selected>Pilih Kategori</option>
+                                @foreach($kategori as $item)
+                                    <option value="{{ $item->kategori_id }}">
+                                        {{ $item->kategori_kode }} - {{ $item->kategori_name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>

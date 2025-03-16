@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataTables\BarangDataTable;
 use App\Models\BarangModel;
+use App\Models\KategoriModel;
 use Illuminate\Http\Request;
 
 class BarangController extends Controller
@@ -15,7 +16,8 @@ class BarangController extends Controller
 
     public function create()
     {
-        return view('barang.create');
+        $kategori = KategoriModel::all();
+        return view('barang.create', compact('kategori'));
     }
 
     public function store(Request $request)
@@ -33,7 +35,8 @@ class BarangController extends Controller
     public function edit($id)
     {
         $barang = BarangModel::findOrFail($id);
-        return view('barang.edit', compact('barang'));
+        $kategori = KategoriModel::all();
+        return view('barang.edit', compact('barang', 'kategori'));
     }
 
     public function update(Request $request)

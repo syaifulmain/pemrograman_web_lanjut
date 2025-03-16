@@ -34,9 +34,14 @@
                                placeholder="Masukan Harga Jual" value="{{ $barang->harga_jual }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="kategori_id">Kategori ID</label>
-                        <input type="text" class="form-control" id="kategori_id" name="kategori_id"
-                               placeholder="Masukan Kategori ID" value="{{ $barang->kategori_id }}" required>
+                        <label for="kategori_id">Kategori</label>
+                        <select class="form-control" id="kategori_id" name="kategori_id" required>
+                            @foreach($kategori as $item)
+                                <option value="{{ $item->kategori_id }}" {{ $item->kategori_id == $barang->kategori_id ? 'selected' : '' }}>
+                                    {{ $item->kategori_kode }} - {{ $item->kategori_nama }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>
