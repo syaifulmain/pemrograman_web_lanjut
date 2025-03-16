@@ -4,6 +4,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\StokController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -64,4 +65,13 @@ Route::prefix('penjualan')->group(function () {
     Route::get('/create', [PenjualanController::class, 'create']);
     Route::get('/detail/{id}', [PenjualanController::class, 'detail']);
     Route::get('/hapus/{id}', [PenjualanController::class, 'delete']);
+});
+
+Route::prefix('stok')->group(function () {
+    Route::get('/', [StokController::class, 'index']);
+    Route::post('/', [StokController::class, 'store']);
+    Route::get('/create', [StokController::class, 'create']);
+    Route::get('/edit/{id}', [StokController::class, 'edit']);
+    Route::put('/edit', [StokController::class, 'update']);
+    Route::get('/hapus/{id}', [StokController::class, 'delete']);
 });

@@ -17,5 +17,6 @@ class VerifyCsrfToken extends Middleware
         '/kategori',
         '/barang',
         '/penjualan',
+        '/stok'
     ];
 }
