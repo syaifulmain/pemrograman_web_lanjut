@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\UserController;
@@ -45,4 +46,13 @@ Route::prefix('user')->group(function () {
     Route::get('/edit/{id}', [UserController::class, 'edit']);
     Route::put('/edit', [UserController::class, 'update']);
     Route::get('/hapus/{id}', [UserController::class, 'delete']);
+});
+
+Route::prefix('barang')->group(function () {
+    Route::get('/', [BarangController::class, 'index']);
+    Route::post('/', [BarangController::class, 'store']);
+    Route::get('/create', [BarangController::class, 'create']);
+    Route::get('/edit/{id}', [BarangController::class, 'edit']);
+    Route::put('/edit', [BarangController::class, 'update']);
+    Route::get('/hapus/{id}', [BarangController::class, 'delete']);
 });
