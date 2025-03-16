@@ -55,6 +55,8 @@ class PenjualanController extends Controller
     public function delete($id)
     {
         $penjualan = PenjualanModel::findOrFail($id);
+
+        $penjualan->penjualanDetail()->delete();
         $penjualan->delete();
 
         return redirect('/penjualan');

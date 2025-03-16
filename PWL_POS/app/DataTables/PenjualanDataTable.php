@@ -24,8 +24,8 @@ class PenjualanDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($row) {
-                return '<a href="/penjualan/detail/' . $row->penjualan_id . '" class="btn btn-sm btn-info">Detail</a>';
-//                    . '<a href="/penjualan/hapus/' . $row->penjualan_id . '" class="btn btn-sm btn-danger">Hapus</a>';
+                return '<a href="/penjualan/detail/' . $row->penjualan_id . '" class="btn btn-sm btn-info">Detail</a>'
+                    . '<a href="/penjualan/hapus/' . $row->penjualan_id . '" class="btn btn-sm btn-danger">Hapus</a>';
             })
             ->setRowId('id');
     }
