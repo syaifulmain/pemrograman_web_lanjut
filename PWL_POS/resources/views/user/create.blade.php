@@ -15,20 +15,30 @@
                     <div class="form-group">
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Masukan Username" required>
+                            <input type="text" class="form-control" id="username" name="username"
+                                   placeholder="Masukan Username" required>
                         </div>
                         <div class="form-group">
                             <label for="nama">Nama</label>
-                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukan Nama" required>
+                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukan Nama"
+                                   required>
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Masukan Password" required>
+                            <input type="password" class="form-control" id="password" name="password"
+                                   placeholder="Masukan Password" required>
                         </div>
                         <div class="form-group">
-                            <label for="level_id">Level ID</label>
-                            <input type="text" class="form-control" id="level_id" name="level_id" placeholder="Masukan Level ID" required>
+                            <label for="level_id">Level</label>
+                            <select class="form-control" id="level_id" name="level_id" required>
+                                @foreach($levels as $level)
+                                    <option value="{{ $level->level_id }}">
+                                        {{ $level->level_kode }} - {{ $level->level_nama }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
+                    </div>
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>

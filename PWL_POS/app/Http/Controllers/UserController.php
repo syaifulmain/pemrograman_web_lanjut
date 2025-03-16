@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\UserDataTable;
+use App\Models\LevelModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -17,7 +18,8 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('user.create');
+        $levels = LevelModel::all();
+        return view('user.create', compact('levels'));
     }
 
     public function store(Request $request)
@@ -34,7 +36,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = UserModel::findOrFail($id);
-        return view('user.edit', compact('user'));
+        $levels = LevelModel::all();
+        return view('user.edit', compact('user', 'levels'));
     }
 
     public function update(Request $request)

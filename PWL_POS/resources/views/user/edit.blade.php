@@ -26,8 +26,14 @@
                         <input type="password" name="password" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="level_id">Level ID</label>
-                        <input type="text" name="level_id" class="form-control" value="{{ $user->level_id }}" required>
+                        <label for="level_id">Level</label>
+                        <select class="form-control" id="level_id" name="level_id" required>
+                            @foreach($levels as $level)
+                                <option value="{{ $level->level_id }}" {{ $user->level_id == $level->level_id ? 'selected' : '' }}>
+                                    {{ $level->level_kode }} - {{ $level->level_nama }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>
