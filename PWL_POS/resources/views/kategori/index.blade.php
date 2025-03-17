@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="float-left">Manage Kategori</div>
-                <a href="kategori/create" class="btn btn-primary float-right">Add</a>
+                <a href="{{route('kategori.create')}}" class="btn btn-primary float-right">Add</a>
             </div>
             <div class="card-body">
                 {{ $dataTable->table() }}
