@@ -1,14 +1,14 @@
 @extends('layouts.app')
 {{-- Customize layout sections --}}
-@section('subtitle', 'Level')
+@section('subtitle', 'User')
 @section('content_header_title', 'Home')
-@section('content_header_subtitle', 'Level')
+@section('content_header_subtitle', 'User')
 @section('content')
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <div class="float-left">Manage Level</div>
-                <a href="level/create" class="btn btn-primary float-right">Add</a>
+                <div class="float-left">Manage User</div>
+                <a href="user/create" class="btn btn-primary float-right">Add</a>
             </div>
             <div class="card-body">
                 {{ $dataTable->table() }}
