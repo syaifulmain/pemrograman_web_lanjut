@@ -28,6 +28,23 @@ Route::get('/kategori', [KategoriController::class, 'index']);
 Route::get('kategori/edit/{id}', [KategoriController::class, 'edit']);
 Route::put('kategori/edit', [KategoriController::class, 'update']);
 Route::get('kategori/hapus/{id}', [KategoriController::class, 'delete']);
+
+Route::get('/level/create', [LevelController::class, 'create']);
+Route::post('/level', [LevelController::class, 'store']);
+Route::get('/level', [LevelController::class, 'index']);
+
+Route::get('level/edit/{id}', [LevelController::class, 'edit']);
+Route::put('level/edit', [LevelController::class, 'update']);
+Route::get('level/hapus/{id}', [LevelController::class, 'delete']);
+
+Route::get('/user/create', [UserController::class, 'create']);
+Route::post('/user', [UserController::class, 'store']);
+Route::get('/user', [UserController::class, 'index']);
+
+Route::get('user/edit/{id}', [UserController::class, 'edit']);
+Route::put('user/edit', [UserController::class, 'update']);
+Route::get('user/hapus/{id}', [UserController::class, 'delete']);
+
 //Route::get('/user', [UserController::class, 'index']);
 //
 //JS4
