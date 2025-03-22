@@ -19,4 +19,4 @@ yarn-error.log
 /.vscode
 /public/vendor
 /public/template
-/public/lang
+/lang/vendor
