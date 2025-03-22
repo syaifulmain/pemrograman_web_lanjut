@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class UserModel extends Model
+class m_user extends Model
 {
     protected $table = 'm_user';
     public $timestamps = false;
@@ -19,8 +18,4 @@ class UserModel extends Model
         'nama',
         'password',
     ];
-    public function level(): BelongsTo
-    {
-        return $this->belongsTo(LevelModel::class, 'level_id', 'level_id');
-    }
 }
