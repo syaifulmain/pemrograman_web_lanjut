@@ -24,20 +24,26 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::prefix('kategori')->group(function () {
     Route::get('/', [KategoriController::class, 'index']);
-    Route::post('/', [KategoriController::class, 'store']);
+    Route::post('/list', [KategoriController::class, 'list']);
+    Route::get('/{id}/show', [KategoriController::class, 'show']);
     Route::get('/create', [KategoriController::class, 'create']);
-    Route::get('/edit/{id}', [KategoriController::class, 'edit']);
-    Route::put('/edit', [KategoriController::class, 'update']);
-    Route::get('/hapus/{id}', [KategoriController::class, 'delete']);
+    Route::post('/', [KategoriController::class, 'store']);
+    Route::get('/{id}/edit', [KategoriController::class, 'edit']);
+    Route::put('/{id}/update', [KategoriController::class, 'update']);
+    Route::get('/{id}/delete', [KategoriController::class, 'confirm']);
+    Route::delete('/{id}/delete', [KategoriController::class, 'delete']);
 });
 
 Route::prefix('level')->group(function () {
     Route::get('/', [LevelController::class, 'index']);
-    Route::post('/', [LevelController::class, 'store']);
+    Route::post('/list', [LevelController::class, 'list']);
+    Route::get('/{id}/show', [LevelController::class, 'show']);
     Route::get('/create', [LevelController::class, 'create']);
-    Route::get('/edit/{id}', [LevelController::class, 'edit']);
-    Route::put('/edit', [LevelController::class, 'update']);
-    Route::get('/hapus/{id}', [LevelController::class, 'delete']);
+    Route::post('/', [LevelController::class, 'store']);
+    Route::get('/{id}/edit', [LevelController::class, 'edit']);
+    Route::put('/{id}/update', [LevelController::class, 'update']);
+    Route::get('/{id}/delete', [LevelController::class, 'confirm']);
+    Route::delete('/{id}/delete', [LevelController::class, 'delete']);
 });
 
 Route::prefix('user')->group(function () {
@@ -61,11 +67,14 @@ Route::prefix('user')->group(function () {
 
 Route::prefix('barang')->group(function () {
     Route::get('/', [BarangController::class, 'index']);
+    Route::post('/list', [BarangController::class, 'list']);
+    Route::get('/{id}/show', [BarangController::class, 'show']);
+    Route::get('/create', [BarangController::class, 'create']);
     Route::post('/', [BarangController::class, 'store']);
-    Route::get('/create', [BarangController::class, 'create/']);
-    Route::get('/edit/{id}', [BarangController::class, 'edit']);
-    Route::put('/edit', [BarangController::class, 'update']);
-    Route::get('/hapus/{id}', [BarangController::class, 'delete']);
+    Route::get('/{id}/edit', [BarangController::class, 'edit']);
+    Route::put('/{id}/update', [BarangController::class, 'update']);
+    Route::get('/{id}/delete', [BarangController::class, 'confirm']);
+    Route::delete('/{id}/delete', [BarangController::class, 'delete']);
 });
 
 Route::prefix('penjualan')->group(function () {
@@ -78,9 +87,12 @@ Route::prefix('penjualan')->group(function () {
 
 Route::prefix('stok')->group(function () {
     Route::get('/', [StokController::class, 'index']);
-    Route::post('/', [StokController::class, 'store']);
+    Route::post('/list', [StokController::class, 'list']);
+    Route::get('/{id}/show', [StokController::class, 'show']);
     Route::get('/create', [StokController::class, 'create']);
-    Route::get('/edit/{id}', [StokController::class, 'edit']);
-    Route::put('/edit', [StokController::class, 'update']);
-    Route::get('/hapus/{id}', [StokController::class, 'delete']);
+    Route::post('/', [StokController::class, 'store']);
+    Route::get('/{id}/edit', [StokController::class, 'edit']);
+    Route::put('/{id}/update', [StokController::class, 'update']);
+    Route::get('/{id}/delete', [StokController::class, 'confirm']);
+    Route::delete('/{id}/delete', [StokController::class, 'delete']);
 });
