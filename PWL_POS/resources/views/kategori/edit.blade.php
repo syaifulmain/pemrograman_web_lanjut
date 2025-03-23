@@ -1,29 +1,108 @@
-@extends('layouts.app')
-
-@section('subtitle', 'Edit Kategori')
-@section('content_header_title', 'Edit Kategori')
-@section('content')
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                Edit Kategori
+@empty($kategori)
+    <div id="modal-master" class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Kesalahan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="card-body">
-                <form method="post" action="../edit">
-                    @csrf
-                    @method('PUT')
-                    <input type="hidden" name="kategori_id" value="{{ $kategori->kategori_id }}">
-                    <div class="form-group">
-                        <label for="kodeKategori">Kode Kategori</label>
-                        <input type="text" name="kodeKategori" class="form-control" value="{{ $kategori->kategori_kode }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="namaKategori">Nama Kategori</label>
-                        <input type="text" name="namaKategori" class="form-control" value="{{ $kategori->kategori_nama }}" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </form>
+            <div class="modal-body">
+                <div class="alert alert-danger">
+                    <h5><i class="icon fas fa-ban"></i> Kesalahan!!!</h5>
+                    Data yang anda cari tidak ditemukan
+                </div>
+                <a href="{{ url('/kategori') }}" class="btn btn-warning">Kembali</a>
             </div>
         </div>
     </div>
-@endsection
+@else
+    <form action="{{ url('/kategori/' . $kategori->kategori_id . '/update') }}" method="POST" id="form-edit">
+        @csrf
+        @method('PUT')
+        <div id="modal-master" class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Kode Kategori</label>
+                        <input value="{{$kategori->kategori_kode}}" type="text" name="kategori_kode" id="kategori_kode" class="form-control" required>
+                        <small id="error-kategori_kode" class="error-text form-text text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Kategori</label>
+                        <input value="{{$kategori->kategori_nama}}" type="text" name="kategori_nama" id="kategori_nama" class="form-control" required>
+                        <small id="error-kategori_nama" class="error-text form-text text-danger"></small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+        $(document).ready(function() {
+            $("#form-edit").validate({
+                rules: {
+                    kategori_kode: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 10
+                    },
+                    kategori_nama: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 100
+                    },
+                },
+                submitHandler: function(form) {
+                    $.ajax({
+                        url: form.action,
+                        type: form.method,
+                        data: $(form).serialize(),
+                        success: function(response) {
+                            if (response.status) {
+                                $('#myModal').modal('hide');
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Berhasil',
+                                    text: response.message
+                                });
+                                dataKategori.ajax.reload();
+                            } else {
+                                $('.error-text').text('');
+                                $.each(response.msgField, function(prefix, val) {
+                                    $('#error-' + prefix).text(val[0]);
+                                });
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Terjadi Kesalahan',
+                                    text: response.message
+                                });
+                            }
+                        }
+                    });
+                    return false;
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
+@endempty

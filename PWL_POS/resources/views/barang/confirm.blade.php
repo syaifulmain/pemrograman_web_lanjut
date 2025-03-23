@@ -1,4 +1,4 @@
-@empty($level)
+@empty($barang)
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -12,62 +12,67 @@
                     <h5><i class="icon fas fa-ban"></i> Kesalahan!!!</h5>
                     Data yang anda cari tidak ditemukan
                 </div>
-                <a href="{{ url('/level') }}" class="btn btn-warning">Kembali</a>
+                <a href="{{ url('/barang') }}" class="btn btn-warning">Kembali</a>
             </div>
         </div>
     </div>
 @else
-    <form action="{{ url('/level/' . $level->level_id . '/update') }}" method="POST" id="form-edit">
+    <form action="{{ url('/barang/' . $barang->barang_id . '/delete') }}" method="POST" id="form-delete">
         @csrf
-        @method('PUT')
+        @method('DELETE')
         <div id="modal-master" class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Data User</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Hapus Data Barang</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label>Kode Level</label>
-                        <input value="{{$level->level_kode}}" type="text" name="level_kode" id="level_kode" class="form-control" required>
-                        <small id="error-level_kode" class="error-text form-text text-danger"></small>
+                    <div class="alert alert-warning">
+                        <h5><i class="icon fas fa-ban"></i> Konfirmasi !!!</h5>
+                        Apakah Anda ingin menghapus data seperti di bawah ini?
                     </div>
-                    <div class="form-group">
-                        <label>Nama Level</label>
-                        <input value="{{$level->level_nama}}" type="text" name="level_nama" id="level_nama" class="form-control" required>
-                        <small id="error-level_nama" class="error-text form-text text-danger"></small>
-                    </div>
+                    <table class="table table-sm table-bordered table-striped">
+                        <tr>
+                            <th class="text-right col-3">Kategori:</th>
+                            <td class="col-9">{{ $barang->kategori->kategori_nama }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right col-3">Kode Barang:</th>
+                            <td class="col-9">{{ $barang->barang_kode }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right col-3">Nama Barang:</th>
+                            <td class="col-9">{{ $barang->barang_nama }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right col-3">Harga Beli:</th>
+                            <td class="col-9">{{ $barang->harga_beli }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right col-3">Harga Jual:</th>
+                            <td class="col-9">{{ $barang->harga_jual }}</td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary">Ya, Hapus</button>
                 </div>
             </div>
         </div>
     </form>
     <script>
-        $(document).ready(function() {
-            $("#form-edit").validate({
-                rules: {
-                    level_kode: {
-                        required: true,
-                        minlength: 3,
-                        maxlength: 10
-                    },
-                    level_nama: {
-                        required: true,
-                        minlength: 3,
-                        maxlength: 100
-                    },
-                },
-                submitHandler: function(form) {
+        $(document).ready(function () {
+            $("#form-delete").validate({
+                rules: {},
+                submitHandler: function (form) {
                     $.ajax({
                         url: form.action,
                         type: form.method,
                         data: $(form).serialize(),
-                        success: function(response) {
+                        success: function (response) {
                             if (response.status) {
                                 $('#myModal').modal('hide');
                                 Swal.fire({
@@ -75,10 +80,10 @@
                                     title: 'Berhasil',
                                     text: response.message
                                 });
-                                dataLevel.ajax.reload();
+                                dataBarang.ajax.reload();
                             } else {
                                 $('.error-text').text('');
-                                $.each(response.msgField, function(prefix, val) {
+                                $.each(response.msgField, function (prefix, val) {
                                     $('#error-' + prefix).text(val[0]);
                                 });
                                 Swal.fire({
@@ -87,19 +92,19 @@
                                     text: response.message
                                 });
                             }
-                        }
+                        },
                     });
                     return false;
                 },
                 errorElement: 'span',
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     error.addClass('invalid-feedback');
                     element.closest('.form-group').append(error);
                 },
-                highlight: function(element, errorClass, validClass) {
+                highlight: function (element, errorClass, validClass) {
                     $(element).addClass('is-invalid');
                 },
-                unhighlight: function(element, errorClass, validClass) {
+                unhighlight: function (element, errorClass, validClass) {
                     $(element).removeClass('is-invalid');
                 }
             });

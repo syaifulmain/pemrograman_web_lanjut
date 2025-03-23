@@ -1,22 +1,85 @@
-@extends('layouts.app')
-{{-- Customize layout sections --}}
-@section('subtitle', 'Kategori')
-@section('content_header_title', 'Home')
-@section('content_header_subtitle', 'Kategori')
+@extends('layouts.template')
 @section('content')
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <div class="float-left">Manage Kategori</div>
-                <a href="{{route('kategori.create')}}" class="btn btn-primary float-right">Add</a>
-            </div>
-            <div class="card-body">
-                {{ $dataTable->table() }}
+    <div class="card card-outline card-primary">
+        <div class="card-header">
+            <h3 class="card-title">{{ $page->title }}</h3>
+            <div class="card-tools">
+                <button onclick="modalAction('{{ url('kategori/create') }}')" class="btn btn-sm btn-success mt-1">
+                    Tambah
+                </button>
             </div>
         </div>
+        <div class="card-body">
+            @if (session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+            @if (session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
+            <table class="table table-bordered table-striped table-hover table-sm" id="table_kategori">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Kode Kategori</th>
+                    <th>Nama Kategori</th>
+                    <th>Aksi</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
     </div>
+    <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static"
+         data-keyboard="false" data-width="75%" aria-hidden="true"></div>
 @endsection
+@push('css')
+@endpush
+@push('js')
+    <script>
+        function modalAction(url = '') {
+            $('#myModal').load(url, function () {
+                $('#myModal').modal('show');
+            });
+        }
 
-@push('scripts')
-    {{ $dataTable->scripts() }}
+        let dataKategori;
+        $(document).ready(function () {
+            dataKategori = $('#table_kategori').DataTable({
+                serverSide: true,
+                responsive: true,
+                scrollX: true,
+                autoWidth: false,
+                ajax: {
+                    "url": "{{ url('kategori/list') }}",
+                    "dataType": "json",
+                    "type": "POST",
+                },
+                columns: [
+                    {
+                        data: "DT_RowIndex",
+                        className: "text-center",
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: "kategori_kode",
+                        className: "",
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: 'kategori_nama',
+                        className: "",
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: "aksi",
+                        className: "",
+                        orderable: false,
+                        searchable: false
+                    }
+                ]
+            });
+        });
+    </script>
 @endpush
