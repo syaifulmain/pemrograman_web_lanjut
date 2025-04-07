@@ -29,6 +29,9 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'postlogin']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/register', [AuthController::class, 'store']);
+
 Route::middleware(['authorize:ADM,MNG,STF'])->group(function () {
     Route::prefix('kategori')->group(function () {
         Route::get('/', [KategoriController::class, 'index']);
@@ -116,3 +119,5 @@ Route::middleware(['authorize:ADM,MNG,STF'])->group(function () {
         Route::delete('/{id}/delete', [StokController::class, 'delete']);
     });
 });
+
+

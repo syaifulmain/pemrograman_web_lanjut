@@ -26,9 +26,28 @@ ack">
         <div class="card-header text-center"><a href="{{ url('/') }}"
                                                 class="h1"><b>Admin</b>LTE</a></div>
         <div class="card-body">
-            <p class="login-box-msg">Sign in to start your session</p>
-            <form action="{{ url('login') }}" method="POST" id="form-login">
+            <p class="login-box-msg">Register</p>
+            <form action="{{ url('register') }}" method="POST" id="form-register">
                 @csrf
+                <div class="form-group">
+                    <select name="level_id" id="level_id" class="form-control" required>
+                        <option value="">- Pilih Level -</option>
+                        @foreach ($levels as $level)
+                            <option value="{{ $level->level_id }}">{{ $level->level_nama }}</option>
+                        @endforeach
+                    </select>
+                    <small id="error-level_id" class="error-text form-text text-danger"></small>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" id="nama" name="nama" class="form-control"
+                           placeholder="Nama">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                    <small id="error-nama" class="error-text text-danger"></small>
+                </div>
                 <div class="input-group mb-3">
                     <input type="text" id="username" name="username" class="form-control"
                            placeholder="Username">
@@ -50,17 +69,9 @@ ack">
                     <small id="error-password" class="error-text text-danger"></small>
                 </div>
                 <div class="row">
-                    <div class="col">
-                        <div class="icheck-primary">
-                            <input type="checkbox" id="remember"><label for="remember">Remember Me</label>
-                        </div>
-                    </div>
                     <!-- /.col -->
                     <div class="col">
-                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                    </div>
-                    <div class="col">
-                        <a href="{{ url('register') }}" class="btn btn-primary btn-block">Register</a>
+                        <button type="submit" class="btn btn-primary btn-block">Register</button>
                     </div>
                     <!-- /.col -->
                 </div>
@@ -89,8 +100,10 @@ ack">
         }
     });
     $(document).ready(function () {
-        $("#form-login").validate({
+        $("#form-register").validate({
             rules: {
+                level_id: {required: true, number: true},
+                nama: {required: true, minlength: 3, maxlength: 100},
                 username: {required: true, minlength: 4, maxlength: 20},
                 password: {required: true, minlength: 6, maxlength: 20}
             },
