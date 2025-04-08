@@ -69,9 +69,11 @@ ack">
                     <small id="error-password" class="error-text text-danger"></small>
                 </div>
                 <div class="row">
-                    <!-- /.col -->
                     <div class="col">
-                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                        <a href="{{url('login')}}" class="btn btn-primary btn-block">Login</a>
+                    </div>
+                    <div class="col">
+                        <a href="{{ url('register') }}" class="btn btn-primary btn-block">Register</a>
                     </div>
                     <!-- /.col -->
                 </div>

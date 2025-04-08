@@ -2,14 +2,14 @@
 
 {{-- Customize layout sections --}}
 
-@section('subtitle', 'Welcome')
-@section('content_header_title', 'Home')
-@section('content_header_subtitle', 'Welcome')
+@section('subtitle', 'Dashboard')
+@section('content_header_title', 'Dashboard')
+@section('content_header_subtitle', 'Dashboard')
 
 {{-- Content body: main page content --}}
 
 @section('content')
-{{--    <p>Welcome to this beautiful admin panel.</p>--}}
+    <p>Welcome to this beautiful Dashboard panel.</p>
 @stop
 
 {{-- Push extra CSS --}}

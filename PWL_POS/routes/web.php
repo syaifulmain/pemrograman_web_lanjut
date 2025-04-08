@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LevelController;
@@ -32,7 +33,9 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'store']);
 
-Route::middleware(['authorize:ADM,MNG,STF'])->group(function () {
+Route::middleware(['authorize:MNG'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::prefix('kategori')->group(function () {
         Route::get('/', [KategoriController::class, 'index']);
         Route::post('/list', [KategoriController::class, 'list']);
@@ -43,6 +46,30 @@ Route::middleware(['authorize:ADM,MNG,STF'])->group(function () {
         Route::put('/{id}/update', [KategoriController::class, 'update']);
         Route::get('/{id}/delete', [KategoriController::class, 'confirm']);
         Route::delete('/{id}/delete', [KategoriController::class, 'delete']);
+    });
+
+    Route::prefix('barang')->group(function () {
+        Route::get('/', [BarangController::class, 'index']);
+        Route::post('/list', [BarangController::class, 'list']);
+        Route::get('/{id}/show', [BarangController::class, 'show']);
+        Route::get('/create', [BarangController::class, 'create']);
+        Route::post('/', [BarangController::class, 'store']);
+        Route::get('/{id}/edit', [BarangController::class, 'edit']);
+        Route::put('/{id}/update', [BarangController::class, 'update']);
+        Route::get('/{id}/delete', [BarangController::class, 'confirm']);
+        Route::delete('/{id}/delete', [BarangController::class, 'delete']);
+    });
+
+    Route::prefix('stok')->group(function () {
+        Route::get('/', [StokController::class, 'index']);
+        Route::post('/list', [StokController::class, 'list']);
+        Route::get('/{id}/show', [StokController::class, 'show']);
+        Route::get('/create', [StokController::class, 'create']);
+        Route::post('/', [StokController::class, 'store']);
+        Route::get('/{id}/edit', [StokController::class, 'edit']);
+        Route::put('/{id}/update', [StokController::class, 'update']);
+        Route::get('/{id}/delete', [StokController::class, 'confirm']);
+        Route::delete('/{id}/delete', [StokController::class, 'delete']);
     });
 });
 
@@ -58,9 +85,7 @@ Route::middleware(['authorize:ADM'])->group(function () {
         Route::get('/{id}/delete', [LevelController::class, 'confirm']);
         Route::delete('/{id}/delete', [LevelController::class, 'delete']);
     });
-});
 
-Route::middleware(['authorize:ADM'])->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('/', [UserController::class, 'index']);
         Route::post('/', [UserController::class, 'store']);
@@ -81,22 +106,7 @@ Route::middleware(['authorize:ADM'])->group(function () {
     });
 });
 
-Route::middleware(['authorize:ADM,MNG'])->group(function () {
-    Route::prefix('barang')->group(function () {
-        Route::get('/', [BarangController::class, 'index']);
-        Route::post('/list', [BarangController::class, 'list']);
-        Route::get('/{id}/show', [BarangController::class, 'show']);
-        Route::get('/create', [BarangController::class, 'create']);
-        Route::post('/', [BarangController::class, 'store']);
-        Route::get('/{id}/edit', [BarangController::class, 'edit']);
-        Route::put('/{id}/update', [BarangController::class, 'update']);
-        Route::get('/{id}/delete', [BarangController::class, 'confirm']);
-        Route::delete('/{id}/delete', [BarangController::class, 'delete']);
-    });
-});
-
-
-Route::middleware(['authorize:ADM,MNG,STF'])->group(function () {
+Route::middleware(['authorize:STF'])->group(function () {
     Route::prefix('penjualan')->group(function () {
         Route::get('/', [PenjualanController::class, 'index']);
         Route::post('/', [PenjualanController::class, 'store']);
@@ -105,19 +115,4 @@ Route::middleware(['authorize:ADM,MNG,STF'])->group(function () {
         Route::get('/hapus/{id}', [PenjualanController::class, 'delete']);
     });
 });
-
-Route::middleware(['authorize:ADM,MNG,STF'])->group(function () {
-    Route::prefix('stok')->group(function () {
-        Route::get('/', [StokController::class, 'index']);
-        Route::post('/list', [StokController::class, 'list']);
-        Route::get('/{id}/show', [StokController::class, 'show']);
-        Route::get('/create', [StokController::class, 'create']);
-        Route::post('/', [StokController::class, 'store']);
-        Route::get('/{id}/edit', [StokController::class, 'edit']);
-        Route::put('/{id}/update', [StokController::class, 'update']);
-        Route::get('/{id}/delete', [StokController::class, 'confirm']);
-        Route::delete('/{id}/delete', [StokController::class, 'delete']);
-    });
-});
-
 

@@ -3,19 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $breadcrumb = (object) [
-            'title' => 'Halaman Home',
-            'list' => ['Home']
-        ];
-        $page = (object) [
-            'title' => 'Selamat datang di halaman home'
-        ];
-        $activeMenu = 'dashboard'; // set menu yang sedang aktif
-        return view('welcome', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
+        if(Auth::check()){ // jika sudah login, maka redirect ke halaman home
+            if (Auth::user()->getRole() == 'ADM') {
+                return redirect('/user');
+            } elseif (Auth::user()->getRole() == 'MNG') {
+                return redirect('/dashboard');
+            } elseif (Auth::user()->getRole() == 'STF') {
+                return redirect('/penjualan');
+            } else {
+                return redirect('/login');
+            }
+        }
+        return view('auth.login');
     }
 }
