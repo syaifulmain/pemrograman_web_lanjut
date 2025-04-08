@@ -13,7 +13,7 @@ class PenjualanDetailSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('t_penjualan_detail')->insert([
+        $data = [
             ['penjualan_id' => 1, 'barang_id' => 1, 'harga' => 15000, 'jumlah' => 1],
             ['penjualan_id' => 1, 'barang_id' => 2, 'harga' => 25000, 'jumlah' => 2],
             ['penjualan_id' => 1, 'barang_id' => 3, 'harga' => 35000, 'jumlah' => 3],
@@ -44,6 +44,15 @@ class PenjualanDetailSeeder extends Seeder
             ['penjualan_id' => 10, 'barang_id' => 8, 'harga' => 85000, 'jumlah' => 8],
             ['penjualan_id' => 10, 'barang_id' => 9, 'harga' => 95000, 'jumlah' => 9],
             ['penjualan_id' => 10, 'barang_id' => 10, 'harga' => 105000, 'jumlah' => 10],
-        ]);
+        ];
+
+        foreach ($data as $item) {
+            DB::table('t_penjualan_detail')->insert([
+                'penjualan_id' => $item['penjualan_id'],
+                'barang_id' => $item['barang_id'],
+                'harga' => $item['harga'],
+                'jumlah' => $item['jumlah'],
+            ]);
+        }
     }
 }
