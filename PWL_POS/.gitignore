@@ -4,6 +4,7 @@
 /public/hot
 /public/storage
 /public/vendor
+/public/adminlte
 /lang/vendor
 /storage/*.key
 /vendor
