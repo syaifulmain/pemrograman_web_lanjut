@@ -4,6 +4,9 @@
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
+                <button onclick="modalAction('{{ url('barang/import') }}')" class="btn btn-info">
+                    Import Barang
+                </button>
                 <button onclick="modalAction('{{ url('barang/create') }}')" class="btn btn-sm btn-success mt-1">
                     Tambah
                 </button>
@@ -71,7 +74,7 @@
                     "url": "{{ url('barang/list') }}",
                     "dataType": "json",
                     "type": "POST",
-                    "data": function(data) {
+                    "data": function (data) {
                         data.kategori_id = $('#kategori_id').val();
                     }
                 },

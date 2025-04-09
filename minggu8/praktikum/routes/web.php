@@ -92,6 +92,8 @@ Route::middleware(['authorize:ADM,MNG'])->group(function () {
         Route::put('/{id}/update', [BarangController::class, 'update']);
         Route::get('/{id}/delete', [BarangController::class, 'confirm']);
         Route::delete('/{id}/delete', [BarangController::class, 'delete']);
+        Route::get('/import', [BarangController::class, 'import']);
+        Route::post('/import_ajax', [BarangController::class, 'import_ajax']);
     });
 });
 
