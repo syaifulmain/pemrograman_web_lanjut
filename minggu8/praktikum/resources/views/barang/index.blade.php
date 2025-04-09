@@ -7,7 +7,10 @@
                 <button onclick="modalAction('{{ url('barang/import') }}')" class="btn btn-info">
                     Import Barang
                 </button>
-                <button onclick="modalAction('{{ url('barang/create') }}')" class="btn btn-sm btn-success mt-1">
+                <a href="{{ url('/barang/export_excel') }}" class="btn btn-primary">
+                    Export Barang
+                </a>
+                <button onclick="modalAction('{{ url('barang/create') }}')" class="btn btn-success">
                     Tambah
                 </button>
             </div>

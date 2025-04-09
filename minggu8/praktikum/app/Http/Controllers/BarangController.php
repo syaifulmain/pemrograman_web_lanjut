@@ -183,13 +183,13 @@ class BarangController extends Controller
 
     public function import_ajax(Request $request)
     {
-        if($request->ajax() || $request->wantsJson()){
+        if ($request->ajax() || $request->wantsJson()) {
             $rules = [
 // validasi file harus xls atau xlsx, max 1MB
                 'file_barang' => ['required', 'mimes:xlsx', 'max:1024']
             ];
             $validator = Validator::make($request->all(), $rules);
-            if($validator->fails()){
+            if ($validator->fails()) {
                 return response()->json([
                     'status' => false,
                     'message' => 'Validasi Gagal',
@@ -203,9 +203,9 @@ class BarangController extends Controller
             $sheet = $spreadsheet->getActiveSheet(); // ambil sheet yang aktif
             $data = $sheet->toArray(null, false, true, true); // ambil data excel
             $insert = [];
-            if(count($data) > 1){ // jika data lebih dari 1 baris
+            if (count($data) > 1) { // jika data lebih dari 1 baris
                 foreach ($data as $baris => $value) {
-                    if($baris > 1){ // baris ke 1 adalah header, maka lewati
+                    if ($baris > 1) { // baris ke 1 adalah header, maka lewati
                         $insert[] = [
                             'kategori_id' => $value['A'],
                             'barang_kode' => $value['B'],
@@ -216,7 +216,7 @@ class BarangController extends Controller
                         ];
                     }
                 }
-                if(count($insert) > 0){
+                if (count($insert) > 0) {
 // insert data ke database, jika data sudah ada, maka diabaikan
                     BarangModel::insertOrIgnore($insert);
                 }
@@ -224,7 +224,7 @@ class BarangController extends Controller
                     'status' => true,
                     'message' => 'Data berhasil diimport'
                 ]);
-            }else{
+            } else {
                 return response()->json([
                     'status' => false,
                     'message' => 'Tidak ada data yang diimport'
@@ -232,5 +232,66 @@ class BarangController extends Controller
             }
         }
         return redirect('/');
+    }
+
+    public function export_excel()
+    {
+        $barang = BarangModel::select(
+            'kategori_id',
+            'barang_kode',
+            'barang_nama',
+            'harga_beli',
+            'harga_jual')
+            ->orderBy('barang_id')
+            ->with('kategori')
+            ->get();
+
+        $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'Kode Barang');
+        $sheet->setCellValue('C1', 'Nama Barang');
+        $sheet->setCellValue('D1', 'Harga Beli');
+        $sheet->setCellValue('E1', 'Harga Jual');
+        $sheet->setCellValue('F1', 'Kategori');
+
+        $sheet->getStyle('A1:F1')->getFont()->setBold(true);
+
+        $no = 1;
+        $baris = 2;
+
+        foreach ($barang as $key => $value) {
+            $sheet->setCellValue('A' . $baris, $no);
+            $sheet->setCellValue('B' . $baris, $value->barang_kode);
+            $sheet->setCellValue('C' . $baris, $value->barang_nama);
+            $sheet->setCellValue('D' . $baris, $value->harga_beli);
+            $sheet->setCellValue('E' . $baris, $value->harga_jual);
+            $sheet->setCellValue('F' . $baris, $value->kategori->kategori_nama);
+
+            $no++;
+            $baris++;
+        }
+
+        foreach (range('A', 'F') as $columnID) {
+            $sheet->getColumnDimension($columnID)->setAutoSize(true);
+        }
+
+        $sheet->setTitle('Data Barang');
+
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $filename = 'Data Barang ' . date('Y-m-d H:i:s') . '.xlsx';
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        header('Cache-Control: max-age=1');
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+        header('Cache-Control: cache, must-revalidate');
+        header('Pragma: public');
+
+        $writer->save('php://output');
+        exit;
     }
 }

@@ -94,6 +94,7 @@ Route::middleware(['authorize:ADM,MNG'])->group(function () {
         Route::delete('/{id}/delete', [BarangController::class, 'delete']);
         Route::get('/import', [BarangController::class, 'import']);
         Route::post('/import_ajax', [BarangController::class, 'import_ajax']);
+        Route::get('/export_excel', [BarangController::class, 'export_excel']);
     });
 });
 
