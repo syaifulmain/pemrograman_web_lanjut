@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,8 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'store']);
+
+Route::post('/profile/upload', [ProfilController::class, 'upload'])->name('profile.upload');
 
 Route::middleware(['authorize:ADM,MNG,STF'])->group(function () {
     Route::prefix('kategori')->group(function () {

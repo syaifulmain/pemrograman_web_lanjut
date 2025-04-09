@@ -23,7 +23,7 @@
                 <form class="form-inline">
                     <div class="input-group input-group-sm">
                         <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                            aria-label="Search">
+                               aria-label="Search">
                         <div class="input-group-append">
                             <button class="btn btn-navbar" type="submit">
                                 <i class="fas fa-search"></i>
@@ -48,7 +48,7 @@
                     <!-- Message Start -->
                     <div class="media">
                         <img src="{{ asset('../../dist/img/user1-128x128.jpg') }}" alt="User Avatar"
-                            class="img-size-50 mr-3 img-circle">
+                             class="img-size-50 mr-3 img-circle">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 Brad Diesel
@@ -65,7 +65,7 @@
                     <!-- Message Start -->
                     <div class="media">
                         <img src="{{ asset('../../dist/img/user8-128x128.jpg')}}" alt="User Avatar"
-                            class="img-size-50 img-circle mr-3">
+                             class="img-size-50 img-circle mr-3">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 John Pierce
@@ -82,7 +82,7 @@
                     <!-- Message Start -->
                     <div class="media">
                         <img src="{{ asset('../../dist/img/user3-128x128.jpg')}}" alt="User Avatar"
-                            class="img-size-50 img-circle mr-3">
+                             class="img-size-50 img-circle mr-3">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 Nora Silvester
@@ -135,5 +135,24 @@
                 <i class="fas fa-th-large"></i>
             </a>
         </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#" role="button">
+                <img src="{{ asset('profile_pictures/' . Auth::user()->getUsername() . '.jpg') }}" class="img-size-32 img-circle bg-dark">
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <a href="#" class="dropdown-item">
+                    <form action="{{ url('profile/upload') }}" method="POST" enctype="multipart/form-data" id="form-upload_profil">
+                        @csrf
+                        <div class="form-group">
+                            <label for="profile_photo">Upload Foto Profil</label>
+                            <input type="file" name="profile_photo" id="profile_photo" class="form-control">
+                            <small id="error-profile_photo" class="error-text form-text text-danger"></small>
+                        </div>
+                        <button type="submit" id="profile_upload" class="btn btn-primary btn-block">Upload</button>
+                    </form>
+                </a>
+            </div>
+        </li>
     </ul>
 </nav>
+
