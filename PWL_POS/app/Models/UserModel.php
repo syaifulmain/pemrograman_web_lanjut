@@ -50,4 +50,9 @@ class UserModel extends Authenticatable
     {
         return $this->username;
     }
+
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
 }

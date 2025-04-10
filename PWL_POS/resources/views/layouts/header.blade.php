@@ -37,7 +37,7 @@
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
-                <img src="{{  Auth::user()->getAvatarName()  }}"
+                <img src="{{ asset('/profile_picture/' . Auth::user()->getAvatarName()) . '.png' }}"
                      class="img-circle" alt=""
                      style="width: 30px; height: 30px;">
             </a>

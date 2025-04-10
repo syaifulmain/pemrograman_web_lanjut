@@ -27,7 +27,7 @@
         </div>
         <div class="card-body">
             <p class="login-box-msg">Register a new account</p>
-            <form action="{{ url('login') }}" method="POST" id="form-login">
+            <form action="{{ url('register') }}" method="POST" id="form-login">
                 @csrf
                 <div class="input-group mb-3">
                     <select name="level_id" id="level_id" class="form-control" required>
