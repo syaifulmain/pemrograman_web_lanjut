@@ -68,15 +68,4 @@
         </ul>
     </nav>
 </div>
-<div class="mt-auto sidebar">
-    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <li class="nav-item">
-            <a href="{{ route('logout') }}"
-               class="nav-link bg-danger text-white">
-                <i class="nav-icon fas fa-sign-out-alt"></i>
-                <p>Logout</p>
-            </a>
-        </li>
-    </ul>
-</div>
 
