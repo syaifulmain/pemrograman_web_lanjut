@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
 </head>
 <body class="hold-transition login-page">
+@if (session('error'))
+    <div class="alert alert-danger">{{ session('error') }}</div>
+@endif
 <div class="login-box">
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
