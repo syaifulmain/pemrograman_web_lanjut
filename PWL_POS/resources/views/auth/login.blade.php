@@ -6,16 +6,13 @@
     <title>Login Pengguna</title>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallb
-ack">
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <!-- icheck bootstrap -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css')
-}}">
+    <link rel="stylesheet" href="{{ asset('adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
     <!-- SweetAlert2 -->
-    <link rel="stylesheet" href="{{ asset('adminlte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-
-4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminlte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
 </head>
@@ -23,48 +20,37 @@ ack">
 <div class="login-box">
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
-        <div class="card-header text-center"><a href="{{ url('/') }}"
-                                                class="h1"><b>Admin</b>LTE</a></div>
+        <div class="card-header text-center">
+            <a href="{{ url('/') }}" class="h1">
+                <b>{{env('APP_NAME')}}</b>
+            </a>
+        </div>
         <div class="card-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">Sign in to your accont</p>
             <form action="{{ url('login') }}" method="POST" id="form-login">
                 @csrf
                 <div class="input-group mb-3">
                     <input type="text" id="username" name="username" class="form-control"
                            placeholder="Username">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
-                        </div>
-                    </div>
                     <small id="error-username" class="error-text text-danger"></small>
                 </div>
                 <div class="input-group mb-3">
                     <input type="password" id="password" name="password" class="form-control"
                            placeholder="Password">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
-                        </div>
-                    </div>
                     <small id="error-password" class="error-text text-danger"></small>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="icheck-primary">
-                            <input type="checkbox" id="remember"><label for="remember">Remember Me</label>
-                        </div>
+                <div class="mb-3 p-0">
+                    <div class="icheck-primary">
+                        <input type="checkbox" id="remember"><label for="remember">Remember Me</label>
                     </div>
-                    <!-- /.col -->
-                    <div class="col">
-                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                    </div>
-                    <div class="col">
-                        <a href="{{ url('register') }}" class="btn btn-primary btn-block">Register</a>
-                    </div>
-                    <!-- /.col -->
+                </div>
+                <div class="p-0">
+                    <button type="submit" class="btn btn-primary btn-block">Log In</button>
                 </div>
             </form>
+        </div>
+        <div class="card-footer text-center">
+            <p>Dont have an account? <a href="{{ route('register') }}">Register</a></p>
         </div>
         <!-- /.card-body -->
     </div>

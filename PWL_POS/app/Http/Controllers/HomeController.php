@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        if(Auth::check()){ // jika sudah login, maka redirect ke halaman home
+        if(Auth::check()){
             if (Auth::user()->getRole() == 'ADM') {
                 return redirect('/user');
             } elseif (Auth::user()->getRole() == 'MNG') {
@@ -20,6 +20,6 @@ class HomeController extends Controller
                 return redirect('/login');
             }
         }
-        return view('auth.login');
+        return redirect('/login');
     }
 }

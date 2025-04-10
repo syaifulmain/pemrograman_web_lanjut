@@ -60,7 +60,6 @@ class AuthController extends Controller
                 'password' => 'required|min:6'
             ];
 
-            // use Illuminate\Support\Facades\Validator;
             $validator = Validator::make($request->all(), $rules);
 
             if ($validator->fails()) {
