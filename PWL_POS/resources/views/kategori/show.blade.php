@@ -30,7 +30,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label>Kode Kategori</label>
-                    <input value="{{$kategori->kategori_kode}}}" type="text" name="kategori_kode" id="kategori_kode"
+                    <input value="{{$kategori->kategori_kode}}" type="text" name="kategori_kode" id="kategori_kode"
                            class="form-control" required disabled>
                     <small id="error-username" class="error-text form-text text-danger"></small>
                 </div>

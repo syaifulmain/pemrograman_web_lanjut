@@ -5,13 +5,12 @@ namespace App\Http\Controllers;
 use App\DataTables\KategoriDataTable;
 use App\Models\KategoriModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 class KategoriController extends Controller
 {
-    public function index(KategoriDataTable $dataTable)
+    public function index()
     {
         $breadcrumb = (object) [
             'title' => 'Daftar Kategori',
@@ -21,7 +20,11 @@ class KategoriController extends Controller
             'title' => 'Daftar kategori yang terdaftar dalam sistem'
         ];
         $activeMenu = 'kategori';
-        return view('kategori.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
+        return view('kategori.index', [
+            'breadcrumb' => $breadcrumb,
+            'page' => $page,
+            'activeMenu' => $activeMenu
+        ]);
     }
 
     public function create()
@@ -57,7 +60,7 @@ class KategoriController extends Controller
         return redirect('/');
     }
 
-    public function list(Request $request)
+    public function list()
     {
         $kategoris = KategoriModel::select('kategori_id', 'kategori_kode', 'kategori_nama');
 
@@ -77,21 +80,25 @@ class KategoriController extends Controller
     {
         $kategori = KategoriModel::find($id);
 
-        return view('kategori.show', ['kategori' => $kategori]);
+        return view('kategori.show', [
+            'kategori' => $kategori
+        ]);
     }
 
     public function edit($id)
     {
         $kategori = KategoriModel::find($id);
 
-        return view('kategori.edit', ['kategori' => $kategori]);
+        return view('kategori.edit', [
+            'kategori' => $kategori
+        ]);
     }
 
     public function update(Request $request, $id)
     {
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
-                'kategori_kode' => 'required|string|min:3|max:10',
+                'kategori_kode' => 'required|string|min:3|max:10|unique:m_kategori,kategori_kode,' . $id . ',kategori_id',
                 'kategori_nama' => 'required|string|min:3|max:100'
             ];
 
@@ -126,7 +133,9 @@ class KategoriController extends Controller
     {
         $kategori = KategoriModel::find($id);
 
-        return view('kategori.confirm', ['kategori' => $kategori]);
+        return view('kategori.confirm', [
+            'kategori' => $kategori
+        ]);
     }
 
     public function delete(Request $request, $id)
