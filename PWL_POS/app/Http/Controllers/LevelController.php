@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\LevelDataTable;
 use App\Models\LevelModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 class LevelController extends Controller
 {
-    public function index(LevelDataTable $dataTable)
+    public function index()
     {
         $breadcrumb = (object) [
             'title' => 'Daftar Level',
@@ -21,7 +19,11 @@ class LevelController extends Controller
             'title' => 'Daftar level yang terdaftar dalam sistem'
         ];
         $activeMenu = 'level';
-        return view('level.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
+        return view('level.index', [
+            'breadcrumb' => $breadcrumb,
+            'page' => $page,
+            'activeMenu' => $activeMenu
+        ]);
     }
 
     public function create()
@@ -33,7 +35,7 @@ class LevelController extends Controller
     {
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
-                'level_kode' => 'required|string|min:3|unique:m_level,level_kode|max:10',
+                'level_kode' => 'required|string|min:3|max:20|unique:m_level,level_kode',
                 'level_nama' => 'required|string|min:3|max:100'
             ];
 
@@ -77,21 +79,25 @@ class LevelController extends Controller
     {
         $level = LevelModel::find($id);
 
-        return view('level.show', ['level' => $level]);
+        return view('level.show', [
+            'level' => $level
+        ]);
     }
 
     public function edit($id)
     {
         $level = LevelModel::find($id);
 
-        return view('level.edit', ['level' => $level]);
+        return view('level.edit', [
+            'level' => $level
+        ]);
     }
 
     public function update(Request $request, $id)
     {
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
-                'level_kode' => 'required|string|min:3|max:10',
+                'level_kode' => 'required|string|min:3|max:10|unique:m_level,level_kode,' . $id . ',level_id',
                 'level_nama' => 'required|string|min:3|max:100'
             ];
 
@@ -126,7 +132,9 @@ class LevelController extends Controller
     {
         $level = LevelModel::find($id);
 
-        return view('level.confirm', ['level' => $level]);
+        return view('level.confirm', [
+            'level' => $level
+        ]);
     }
 
     public function delete(Request $request, $id)

@@ -30,7 +30,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label>Kode Level</label>
-                    <input value="{{$level->level_kode}}}" type="text" name="level_kode" id="level_kode"
+                    <input value="{{$level->level_kode}}" type="text" name="level_kode" id="level_kode"
                            class="form-control" required disabled>
                     <small id="error-username" class="error-text form-text text-danger"></small>
                 </div>
