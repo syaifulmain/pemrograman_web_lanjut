@@ -10,12 +10,6 @@
             </div>
         </div>
         <div class="card-body">
-            @if (session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
-            @if (session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
-            @endif
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group row">
@@ -28,6 +22,10 @@
                                 @endforeach
                             </select>
                             <small class="form-text text-muted">Kategori Barang</small>
+                        </div>
+                        <div class="col-3">
+                            <input type="date" class="form-control" id="filter_tanggal" name="filter_tanggal">
+                            <small class="form-text text-muted">Tanggal</small>
                         </div>
                     </div>
                 </div>
@@ -50,8 +48,6 @@
     <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static"
          data-keyboard="false" data-width="75%" aria-hidden="true"></div>
 @endsection
-@push('css')
-@endpush
 @push('js')
     <script>
         function modalAction(url = '') {
@@ -73,6 +69,7 @@
                     "type": "POST",
                     "data": function (data) {
                         data.barang_id = $('#barang_id').val();
+                        data.filter_tanggal = $('#filter_tanggal').val();
                     }
                 },
                 columns: [{
@@ -120,7 +117,7 @@
             });
         });
 
-        $('#barang_id').on('change', function () {
+        $('#barang_id, #filter_tanggal').on('change', function () {
             dataStok.ajax.reload();
         });
     </script>

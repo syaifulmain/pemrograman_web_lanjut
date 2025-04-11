@@ -18,16 +18,7 @@
                     </select>
                     <small id="error-barang_id" class="error-text form-text text-danger"></small>
                 </div>
-                <div class="form-group">
-                    <label>User</label>
-                    <select name="user_id" id="user_id" class="form-control" required>
-                        <option value="">Pilih User</option>
-                        @foreach ($users as $user)
-                            <option value="{{ $user->user_id }}">{{ $user->nama }}</option>
-                        @endforeach
-                    </select>
-                    <small id="error-barang_id" class="error-text form-text text-danger"></small>
-                </div>
+                <input type="hidden" name="user_id" id="user_id" value="{{ auth()->user()->getUserId() }}">
                 <div class="form-group">
                     <label>Tanggal</label>
                     <input type="date" name="stok_tanggal" id="stok_tanggal" class="form-control" required>

@@ -51,7 +51,7 @@
                     </div>
                     <div class="form-group">
                         <label>Tanggal</label>
-                        <input type="date" name="stok_tanggal" id="stok_tanggal" class="form-control" value="{{ $stok->stok_tanggal }}" required>
+                        <input type="date" name="stok_tanggal" id="stok_tanggal" class="form-control" value="{{ explode(' ',$stok->stok_tanggal)[0] }}" required>
                         <small id="error-stok_tanggal" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">

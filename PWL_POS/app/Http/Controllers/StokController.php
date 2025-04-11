@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\StokDataTable;
 use App\Models\BarangModel;
-use App\Models\KategoriModel;
 use App\Models\StokModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -80,8 +77,8 @@ class StokController extends Controller
             $stoks = $stoks->where('barang_id', $request->barang_id);
         }
 
-        if ($request->user_id) {
-            $stoks = $stoks->where('user_id', $request->user_id);
+        if ($request->filter_tanggal) {
+            $stoks = $stoks->whereDate('stok_tanggal', $request->filter_tanggal);
         }
 
         return DataTables::of($stoks)
