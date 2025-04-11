@@ -10,12 +10,6 @@
             </div>
         </div>
         <div class="card-body">
-            @if (session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
-            @if (session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
-            @endif
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group row">
@@ -23,8 +17,8 @@
                         <div class="col-3">
                             <select class="form-control" id="kategori_id" name="kategori_id" required>
                                 <option value="">- Semua -</option>
-                                @foreach ($kategori as $item)
-                                    <option value="{{ $item->kategori_id }}">{{ $item->kategori_nama }}</option>
+                                @foreach ($kategoris as $kategori)
+                                    <option value="{{ $kategori->kategori_id }}">{{ $kategori->kategori_nama }}</option>
                                 @endforeach
                             </select>
                             <small class="form-text text-muted">Kategori Barang</small>
@@ -41,6 +35,7 @@
                     <th>Nama Barang</th>
                     <th>Harga Beli</th>
                     <th>Harga Jual</th>
+                    <th>Stok</th>
                     <th>Aksi</th>
                 </tr>
                 </thead>
@@ -50,8 +45,6 @@
     <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static"
          data-keyboard="false" data-width="75%" aria-hidden="true"></div>
 @endsection
-@push('css')
-@endpush
 @push('js')
     <script>
         function modalAction(url = '') {
@@ -108,6 +101,12 @@
                     },
                     {
                         data: "harga_jual",
+                        className: "",
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: "stok_akhir",
                         className: "",
                         orderable: true,
                         searchable: true

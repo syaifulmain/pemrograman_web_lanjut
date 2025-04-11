@@ -46,6 +46,10 @@
                     <label>Harga Jual</label>
                     <input value="{{ $barang->harga_jual }}" type="text" class="form-control" disabled>
                 </div>
+                <div class="form-group">
+                    <label>Stok Saat Ini</label>
+                    <input value="{{ $barang->stok_akhir }}" type="text" class="form-control" disabled>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-secondary">Keluar</button>

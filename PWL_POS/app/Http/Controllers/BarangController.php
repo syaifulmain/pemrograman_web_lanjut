@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\BarangDataTable;
 use App\Models\BarangModel;
 use App\Models\KategoriModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -25,7 +25,7 @@ class BarangController extends Controller
         return view('barang.index', [
             'breadcrumb' => $breadcrumb,
             'page' => $page,
-            'kategori' => $kategoris,
+            'kategoris' => $kategoris,
             'activeMenu' => $activeMenu
         ]);
     }
@@ -71,9 +71,16 @@ class BarangController extends Controller
     public function list(Request $request)
     {
         $barangs = BarangModel::select('barang_id', 'kategori_id', 'barang_kode', 'barang_nama', 'harga_beli', 'harga_jual')
-            ->with('kategori');
+            ->with('kategori')
+            ->withSum('stok', 'stok_jumlah')
+            ->withSum('detailPenjualan', 'jumlah')
+            ->get()
+            ->map(function ($barang) {
+                $barang->stok_akhir = $barang->stok_sum_stok_jumlah - $barang->detail_penjualan_sum_jumlah;
+                return $barang;
+            });
 
-        if ($request->kateogri_id) {
+        if ($request->kategori_id) {
             $barangs->where('kategori_id', $request->kategori_id);
         }
 
@@ -91,7 +98,12 @@ class BarangController extends Controller
 
     public function show(string $id)
     {
-        $barang = BarangModel::find($id);
+        $barang = BarangModel::find($id)
+            ->withSum('stok', 'stok_jumlah')
+            ->withSum('detailPenjualan', 'jumlah')
+            ->first();
+
+        $barang->stok_akhir = $barang->stok_sum_stok_jumlah - $barang->detail_penjualan_sum_jumlah;
 
         return view('barang.show', ['barang' => $barang]);
     }
