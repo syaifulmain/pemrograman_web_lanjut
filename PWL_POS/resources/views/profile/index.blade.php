@@ -38,6 +38,7 @@
                     <div class="input-group mb-3">
                         <input type="password" id="password" name="password" class="form-control"
                                placeholder="Password">
+{{--                        <small class="form-text text-muted">Abaikan jika tidak ingin ubah password</small>--}}
                         <small id="error-password" class="error-text text-danger"></small>
                     </div>
                     <div class="p-0">
@@ -85,40 +86,14 @@
                     },
                     password: {
                         required: false,
-                        minlength: 6
+                        minlength: 6,
+                        maxlength: 255
                     },
                     profile_picture: {
                         required: false,
                         extension: "jpg|jpeg|png",
                         accept: "image/*"
                     }
-                },
-                sumbitHandler: function (form) {
-                    $.ajax({
-                        url: form.action,
-                        type: form.method,
-                        data: $(form).serialize(),
-                        success: function(response) {
-                            if (response.status) {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Berhasil',
-                                    text: response.message
-                                });
-                            } else {
-                                $('.error-text').text('');
-                                $.each(response.msgField, function(prefix, val) {
-                                    $('#error-' + prefix).text(val[0]);
-                                });
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Terjadi Kesalahan',
-                                    text: response.message
-                                });
-                            }
-                        }
-                    });
-                    return false;
                 },
                 errorElement: 'span',
                 errorPlacement: function (error, element) {

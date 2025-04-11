@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -19,12 +20,30 @@ class ProfileController extends Controller
             'title' => 'Profile'
         ];
         $activeMenu = 'profile';
-        return view('profile.index', compact('user', 'breadcrumb', 'page', 'activeMenu'));
+        return view('profile.index', [
+            'breadcrumb' => $breadcrumb,
+            'page' => $page,
+            'activeMenu' => $activeMenu,
+            'user' => $user
+        ]);
     }
 
     public function edit(Request $request)
     {
         $user = UserModel::findOrFail(auth()->user()->getUserId());
+
+        $rules = [
+            'username' => 'required|string|min:3|max:20|unique:m_user,username,' . $user->user_id . ',user_id',
+            'nama' => 'required|string|min:3|max:100',
+            'password' => 'nullable|min:6|max:255',
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $user->username = $request->username;
         $user->nama = $request->nama;
