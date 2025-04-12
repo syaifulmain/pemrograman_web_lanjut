@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             StokSeeder::class,
             PenjualanSeeder::class,
             PenjualanDetailSeeder::class,
-            PembayaranSeeder::class,
+//            PembayaranSeeder::class,
         ]);
     }
 }

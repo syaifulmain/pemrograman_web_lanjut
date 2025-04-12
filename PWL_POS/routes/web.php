@@ -111,10 +111,16 @@ Route::middleware(['mustLogin'])->group(function () {
     Route::middleware(['authorize:STF'])->group(function () {
         Route::prefix('penjualan')->group(function () {
             Route::get('/', [PenjualanController::class, 'index']);
-            Route::post('/', [PenjualanController::class, 'store']);
+            Route::post('/list', [PenjualanController::class, 'list']);
+            Route::get('/{id}/show', [PenjualanController::class, 'show']);
             Route::get('/create', [PenjualanController::class, 'create']);
-            Route::get('/detail/{id}', [PenjualanController::class, 'detail']);
-            Route::get('/hapus/{id}', [PenjualanController::class, 'delete']);
+            Route::get('/{id}/edit', [PenjualanController::class, 'edit']);
+            Route::put('/{id}/update', [PenjualanController::class, 'update']);
+            Route::get('/{id}/delete', [PenjualanController::class, 'confirm']);
+            Route::delete('/{id}/delete', [PenjualanController::class, 'delete']);
+            Route::post('/list_barang', [PenjualanController::class, 'listBarang']);
+            Route::get('/bayar', [PenjualanController::class, 'bayar']);
+            Route::post('/store', [PenjualanController::class, 'postbayar']);
         });
     });
 });
