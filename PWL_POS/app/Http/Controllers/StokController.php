@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BarangModel;
 use App\Models\StokModel;
+use App\Models\SupplierModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -35,7 +36,8 @@ class StokController extends Controller
     {
         $barangs = BarangModel::select('barang_id', 'barang_nama')->get();
         $users = UserModel::select('user_id', 'nama')->get();
-        return view('stok.create', ['barangs' => $barangs, 'users' => $users]);
+        $suppliers = SupplierModel::select('supplier_id', 'supplier_nama')->get();
+        return view('stok.create', ['barangs' => $barangs, 'users' => $users, 'suppliers' => $suppliers]);
     }
 
     public function store(Request $request)
@@ -104,18 +106,25 @@ class StokController extends Controller
         $stok = StokModel::find($id);
         $barangs = BarangModel::select('barang_id', 'barang_nama')->get();
         $users = UserModel::select('user_id', 'nama')->get();
+        $suppliers = SupplierModel::select('supplier_id', 'supplier_nama')->get();
 
-        return view('stok.edit', ['stok' => $stok, 'barangs' => $barangs, 'users' => $users]);
+        return view('stok.edit', [
+            'stok' => $stok,
+            'barangs' => $barangs,
+            'users' => $users,
+            'suppliers' => $suppliers
+        ]);
     }
 
     public function update(Request $request, $id)
     {
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
-                'barang_kode' => 'required|string|min:3|max:10',
-                'barang_nama' => 'required|string|min:3|max:100',
-                'harga_beli' => 'required|numeric',
-                'harga_jual' => 'required|numeric',
+                'barang_id' => 'required|numeric',
+                'user_id' => 'required|numeric',
+                'supplier_id' => 'required|numeric',
+                'stok_tanggal' => 'required|date',
+                'stok_jumlah' => 'required|numeric',
             ];
 
             $validator = Validator::make($request->all(), $rules);

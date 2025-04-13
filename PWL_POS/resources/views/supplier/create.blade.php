@@ -1,43 +1,32 @@
-<form action="{{ url('/stok') }}" method="POST" id="form-tambah">
+<form action="{{ url('/supplier') }}" method="POST" id="form-tambah">
     @csrf
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Stok</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Supplier</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>Barang</label>
-                    <select name="barang_id" id="barang_id" class="form-control" required>
-                        <option value="">Pilih Barang</option>
-                        @foreach ($barangs as $barang)
-                            <option value="{{ $barang->barang_id }}">{{ $barang->barang_nama }}</option>
-                        @endforeach
-                    </select>
-                    <small id="error-barang_id" class="error-text form-text text-danger"></small>
+                    <label>Kode Supplier</label>
+                    <input value="" type="text" name="supplier_kode" id="supplier_kode" class="form-control" required>
+                    <small id="error-supplier_kode" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
-                    <label>Supplier</label>
-                    <select name="supplier_id" id="supplier_id" class="form-control" required>
-                        <option value="">Pilih Barang</option>
-                        @foreach ($suppliers as $supplier)
-                            <option value="{{ $supplier->supplier_id }}">{{ $supplier->supplier_nama }}</option>
-                        @endforeach
-                    </select>
-                    <small id="error-supplier_id" class="error-text form-text text-danger"></small>
-                </div>
-                <input type="hidden" name="user_id" id="user_id" value="{{ auth()->user()->getUserId() }}">
-                <div class="form-group">
-                    <label>Tanggal</label>
-                    <input type="date" name="stok_tanggal" id="stok_tanggal" class="form-control" required>
-                    <small id="error-stok_tanggal" class="error-text form-text text-danger"></small>
+                    <label>Nama Supplier</label>
+                    <input value="" type="text" name="supplier_nama" id="supplier_nama" class="form-control" required>
+                    <small id="error-supplier_nama" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
-                    <label>Jumlah Stok</label>
-                    <input type="number" name="stok_jumlah" id="stok_jumlah" class="form-control" required>
-                    <small id="error-stok_jumlah" class="error-text form-text text-danger"></small>
+                    <label>Alamat Supplier</label>
+                    <input value="" type="text" name="supplier_alamat" id="supplier_alamat" class="form-control" required>
+                    <small id="error-supplier_alamat" class="error-text form-text text-danger"></small>
+                </div>
+                <div class="form-group">
+                    <label>Telepon Supplier</label>
+                    <input value="" type="text" name="supplier_telepon" id="supplier_telepon" class="form-control" required>
+                    <small id="error-supplier_telepon" class="error-text form-text text-danger"></small>
                 </div>
             </div>
             <div class="modal-footer">
@@ -51,21 +40,26 @@
     $(document).ready(function() {
         $("#form-tambah").validate({
             rules: {
-                barang_id: {
-                    required: true
-                },
-                user_id: {
-                    required: true
-                },
-                supplier_id: {
-                    required: true
-                },
-                stok_tanggal: {
-                    required: true
-                },
-                stok_jumlah: {
+                supplier_kode: {
                     required: true,
-                    number: true
+                    minlength: 3,
+                    maxlength: 10
+                },
+                supplier_nama: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 100
+                },
+                supplier_telepon: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 20,
+                    digits: true
+                },
+                supplier_alamat: {
+                    required: true,
+                    minlength: 5,
+                    maxlength: 255
                 }
             },
             submitHandler: function(form) {
@@ -81,7 +75,7 @@
                                 title: 'Berhasil',
                                 text: response.message
                             });
-                            dataStok.ajax.reload();
+                            dataSupplier.ajax.reload();
                         } else {
                             $('.error-text').text('');
                             $.each(response.msgField, function(prefix, val) {

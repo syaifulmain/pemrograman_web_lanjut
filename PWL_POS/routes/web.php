@@ -9,6 +9,7 @@ use App\Http\Controllers\LevelController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StokController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -79,6 +80,18 @@ Route::middleware(['mustLogin'])->group(function () {
             Route::put('/{id}/update', [StokController::class, 'update']);
             Route::get('/{id}/delete', [StokController::class, 'confirm']);
             Route::delete('/{id}/delete', [StokController::class, 'delete']);
+        });
+
+        Route::prefix('supplier')->group(function () {
+            Route::get('/', [SupplierController::class, 'index']);
+            Route::post('/list', [SupplierController::class, 'list']);
+            Route::get('/{id}/show', [SupplierController::class, 'show']);
+            Route::get('/create', [SupplierController::class, 'create']);
+            Route::post('/', [SupplierController::class, 'store']);
+            Route::get('/{id}/edit', [SupplierController::class, 'edit']);
+            Route::put('/{id}/update', [SupplierController::class, 'update']);
+            Route::get('/{id}/delete', [SupplierController::class, 'confirm']);
+            Route::delete('/{id}/delete', [SupplierController::class, 'delete']);
         });
     });
 
