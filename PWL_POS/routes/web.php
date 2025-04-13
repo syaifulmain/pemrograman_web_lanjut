@@ -158,6 +158,10 @@ Route::middleware(['mustLogin'])->group(function () {
             Route::post('/list_barang', [PenjualanController::class, 'listBarang']);
             Route::get('/bayar', [PenjualanController::class, 'bayar']);
             Route::post('/store', [PenjualanController::class, 'postbayar']);
+            Route::get('/import', [PenjualanController::class, 'import']);
+            Route::post('/import_ajax', [PenjualanController::class, 'import_ajax']);
+            Route::get('/export_excel', [PenjualanController::class, 'export_excel']);
+            Route::get('/export_pdf', [PenjualanController::class, 'export_pdf']);
         });
     });
 });
