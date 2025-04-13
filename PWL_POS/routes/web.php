@@ -88,6 +88,10 @@ Route::middleware(['mustLogin'])->group(function () {
             Route::put('/{id}/update', [StokController::class, 'update']);
             Route::get('/{id}/delete', [StokController::class, 'confirm']);
             Route::delete('/{id}/delete', [StokController::class, 'delete']);
+            Route::get('/import', [StokController::class, 'import']);
+            Route::post('/import_ajax', [StokController::class, 'import_ajax']);
+            Route::get('/export_excel', [StokController::class, 'export_excel']);
+            Route::get('/export_pdf', [StokController::class, 'export_pdf']);
         });
 
         Route::prefix('supplier')->group(function () {
