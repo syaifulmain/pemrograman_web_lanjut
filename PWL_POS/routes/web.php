@@ -110,6 +110,10 @@ Route::middleware(['mustLogin'])->group(function () {
             Route::put('/{id}/update', [LevelController::class, 'update']);
             Route::get('/{id}/delete', [LevelController::class, 'confirm']);
             Route::delete('/{id}/delete', [LevelController::class, 'delete']);
+            Route::get('/import', [LevelController::class, 'import']);
+            Route::post('/import_ajax', [LevelController::class, 'import_ajax']);
+            Route::get('/export_excel', [LevelController::class, 'export_excel']);
+            Route::get('/export_pdf', [LevelController::class, 'export_pdf']);
         });
 
         Route::prefix('user')->group(function () {
