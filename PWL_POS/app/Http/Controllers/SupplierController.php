@@ -202,17 +202,16 @@ class SupplierController extends Controller
                 foreach ($data as $baris => $value) {
                     if ($baris > 1) {
                         $insert[] = [
-                            'supplier_id' => $value['A'],
-                            'supplier_kode' => $value['B'],
-                            'supplier_nama' => $value['C'],
-                            'supplier_telepon' => $value['D'],
-                            'supplier_alamat' => $value['E'],
+                            'supplier_kode' => $value['A'],
+                            'supplier_nama' => $value['B'],
+                            'supplier_telepon' => $value['B'],
+                            'supplier_alamat' => $value['D'],
                             'created_at' => now(),
                         ];
                     }
                 }
                 if (count($insert) > 0) {
-                    UserModel::insertOrIgnore($insert);
+                    SupplierModel::insertOrIgnore($insert);
                 }
                 return response()->json([
                     'status' => true,
@@ -262,7 +261,7 @@ class SupplierController extends Controller
             $baris++;
         }
 
-        foreach (range('A', 'C') as $columnID) {
+        foreach (range('A', 'E') as $columnID) {
             $sheet->getColumnDimension($columnID)->setAutoSize(true);
         }
 

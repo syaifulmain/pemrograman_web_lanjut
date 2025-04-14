@@ -220,18 +220,17 @@ class StokController extends Controller
                 foreach ($data as $baris => $value) {
                     if ($baris > 1) {
                         $insert[] = [
-                            'stok_id' => $value['A'],
-                            'barang_id' => $value['B'],
-                            'user_id' => $value['C'],
-                            'supplier_id' => $value['D'],
-                            'stok_tanggal' => $value['E'],
-                            'stok_jumlah' => $value['F'],
+                            'barang_id' => $value['A'],
+                            'user_id' => $value['B'],
+                            'supplier_id' => $value['C'],
+                            'stok_tanggal' => $value['D'],
+                            'stok_jumlah' => $value['E'],
                             'created_at' => now(),
                         ];
                     }
                 }
                 if (count($insert) > 0) {
-                    UserModel::insertOrIgnore($insert);
+                    StokModel::insertOrIgnore($insert);
                 }
                 return response()->json([
                     'status' => true,
@@ -263,7 +262,7 @@ class StokController extends Controller
         $sheet->setCellValue('E1', 'Supplier');
         $sheet->setCellValue('F1', 'Tanggal');
         $sheet->setCellValue('G1', 'Jumlah');
-        
+
         $sheet->getStyle('A1:G1')->getFont()->setBold(true);
 
         $no = 1;

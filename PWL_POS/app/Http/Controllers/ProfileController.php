@@ -42,7 +42,7 @@ class ProfileController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return redirect()->route('profile')->with('error', 'Validasi Gagal')->withErrors($validator)->withInput();
         }
 
         $user->username = $request->username;

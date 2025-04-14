@@ -197,15 +197,14 @@ class LevelController extends Controller
                 foreach ($data as $baris => $value) {
                     if ($baris > 1) {
                         $insert[] = [
-                            'level_id' => $value['A'],
-                            'level_kode' => $value['B'],
-                            'level_nama' => $value['C'],
+                            'level_kode' => $value['A'],
+                            'level_nama' => $value['B'],
                             'created_at' => now(),
                         ];
                     }
                 }
                 if (count($insert) > 0) {
-                    UserModel::insertOrIgnore($insert);
+                    LevelModel::insertOrIgnore($insert);
                 }
                 return response()->json([
                     'status' => true,

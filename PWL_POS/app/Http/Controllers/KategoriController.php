@@ -199,15 +199,14 @@ class KategoriController extends Controller
                 foreach ($data as $baris => $value) {
                     if ($baris > 1) {
                         $insert[] = [
-                            'kategori_id' => $value['A'],
-                            'kategori_kode' => $value['B'],
-                            'kategori_nama' => $value['C'],
+                            'kategori_kode' => $value['A'],
+                            'kategori_nama' => $value['B'],
                             'created_at' => now(),
                         ];
                     }
                 }
                 if (count($insert) > 0) {
-                    UserModel::insertOrIgnore($insert);
+                    KategoriModel::insertOrIgnore($insert);
                 }
                 return response()->json([
                     'status' => true,
