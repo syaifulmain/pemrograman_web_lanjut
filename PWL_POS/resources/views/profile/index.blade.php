@@ -25,17 +25,20 @@
                                accept="image/*">
                         <small id="error-profile_picture" class="error-text text-danger"></small>
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="form-group">
+                    <label>Nama</label>
                         <input type="text" id="nama" name="nama" class="form-control"
                                placeholder="Nama" value="{{ $user->nama }}">
                         <small id="error-nama" class="error-text text-danger"></small>
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="form-group">
+                    <label>Username</label>
                         <input type="text" id="username" name="username" class="form-control"
                                placeholder="Username" value="{{ $user->username }}">
                         <small id="error-username" class="error-text text-danger"></small>
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="form-group">
+                    <label>Password</label>
                         <input type="password" id="password" name="password" class="form-control"
                                placeholder="Password">
 {{--                        <small class="form-text text-muted">Abaikan jika tidak ingin ubah password</small>--}}
