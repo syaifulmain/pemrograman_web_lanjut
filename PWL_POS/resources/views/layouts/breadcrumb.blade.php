@@ -6,6 +6,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item active">{{ auth()->user()->getRoleName() }}</li>
                     @foreach ($breadcrumb->list as $key => $value)
                         @if ($key == count($breadcrumb->list) - 1)
                             <li class="breadcrumb-item active">{{ $value }}</li>

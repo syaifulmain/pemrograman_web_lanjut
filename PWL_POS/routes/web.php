@@ -44,7 +44,12 @@ Route::middleware(['mustLogin'])->group(function () {
 
 
     Route::middleware(['authorize:MNG'])->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::prefix('dashboard')->group(function () {
+            Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+            Route::post('/top10Sales', [DashboardController::class, 'top10Sales']);
+            Route::post('/totalSales', [DashboardController::class, 'totalSales']);
+        });
 
         Route::prefix('kategori')->group(function () {
             Route::get('/', [KategoriController::class, 'index']);
