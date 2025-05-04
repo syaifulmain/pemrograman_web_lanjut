@@ -54,16 +54,35 @@ class FileUploadController extends Controller
 //        echo "proses upload berhasil, berkas disimpan di: " . $path;
 
         // E
+//        $request->validate([
+//            'berkas' => 'required|file|image|max:500',
+//        ]);
+//        $extFile = $request->berkas->getClientOriginalName();
+//        $namaFile = 'web-' . time() . '.' . $extFile;
+//        $path = $request->berkas->storeAs('public', $namaFile);
+//
+//        $pathBaru = asset('storage/' . $namaFile);
+//        echo "proses upload berhasil, berkas disimpan di: " . $path;
+//        echo "<br>";
+//        echo "Tampilkan link:<a href='$pathBaru'>$pathBaru</a>";
+
+        // F
         $request->validate([
             'berkas' => 'required|file|image|max:500',
         ]);
-        $extFile = $request->berkas->getClientOriginalName();
-        $namaFile = 'web-' . time() . '.' . $extFile;
-        $path = $request->berkas->storeAs('public', $namaFile);
 
-        $pathBaru = asset('storage/' . $namaFile);
-        echo "proses upload berhasil, berkas disimpan di: " . $path;
+        $extFile = $request->berkas->getClientOriginalName();
+        $namaFile = 'web-' . time() . "." . $extFile;
+
+        $path = $request->berkas->move('gambar', $namaFile);
+        $path = str_replace("\\", "/", $path);
+
+        echo "Variabel path berisi: $path <br>";
+
+        $pathBaru = asset('gambar/' . $namaFile);
+        echo "Proses upload berhasil, data disimpan pada: $path";
         echo "<br>";
-        echo "Tampilkan link:<a href='$pathBaru'>$pathBaru</a>";
+        echo "Tampilkan link: <a href='$pathBaru'>$pathBaru</a>";
+
     }
 }
